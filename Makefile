@@ -1,9 +1,15 @@
 
-CFLAGS+= -I.
+CFLAGS+= -I. -Wall
+CFLAGS+= -Werror
 LDFLAGS+=-lssl -lcrypto
-all: sample
-sample: easy_ssl.o client.o
-	$(CC) -o easy_ssl.exe client.o easy_ssl.o $(CFLAGS) $(LDFLAGS)
+all: client server
+
+client: easy_ssl.o client.o
+	$(CC) -o client.exe client.o easy_ssl.o $(CFLAGS) $(LDFLAGS)
+
+server: easy_ssl.o server.o
+	$(CC) -o server.exe server.o easy_ssl.o $(CFLAGS) $(LDFLAGS)
+
 
 clean:
 	rm -rf *.o *.a *.exe

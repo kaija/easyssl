@@ -19,16 +19,22 @@ enum{
     SSL_ERR_SUCCESS,
     SSL_ERR_INIT,
     SSL_ERR_TLS,
-    SSL_ERR_NO_CERT,
+    SSL_ERR_CERT,
+    SSL_ERR_PKEY,
     SSL_ERR_NEW,
     SSL_ERR_CONN,
     SSL_ERR_PARAM,
-    SSL_ERR_SOCK
+    SSL_ERR_SOCK,
+    SSL_ERR_BIND,
+    SSL_ERR_LISTEN,
+    SSL_ERR_SEND,
+    SSL_ERR_RECV
 };
 
 typedef struct easyssl_ctx{
     struct sockaddr_in  srv_addr;
-    int                 sk;
+    struct sockaddr_in  addr;
+    int                 fd;
     int                 cert_auth;
     char                cert_path[EASYSSL_PATH_LEN];
     char                pkey_path[EASYSSL_PATH_LEN];
@@ -36,9 +42,19 @@ typedef struct easyssl_ctx{
     BIO                 *bio;
     SSL_CTX             *ctx;
     SSL                 *ssl;
+    SSL_METHOD          *method;
 }EASYSSL;
 
-
 EASYSSL *easyssl_new();
+
+EASYSSL *easyssl_accept(EASYSSL *ctx);
+int easyssl_set_cert(EASYSSL *ctx, char *cert, char *pkey, char *passwd);
+int easyssl_connect(EASYSSL *ctx, char *url, int port);
+int easyssl_bind(EASYSSL *ctx, char *ip, int port, int max_cli);
+void easyssl_print_cert(SSL* ssl);
+int easyssl_send(EASYSSL *ctx, const void *data, size_t len, int timeout);
+int easyssl_recv(EASYSSL *ctx, void *data, size_t len, int timeout);
+void easyssl_free(EASYSSL *ctx);
+void easyssl_destroy(EASYSSL *ctx);
 
 #endif

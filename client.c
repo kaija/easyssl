@@ -6,7 +6,7 @@ int main()
 {
     EASYSSL *ctx = easyssl_new();
     if(ctx){
-        easyssl_connect(ctx, "s5.securepilot.com", 443);
+        easyssl_connect(ctx, "localhost", 8443);
     }
     return 0;
 }
