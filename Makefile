@@ -1,14 +1,22 @@
 
+OBJS_LIB=easyssl.o
+STATIC_LIB=libeasyssl.a
+
+
 CFLAGS+= -I. -Wall
 CFLAGS+= -Werror
 LDFLAGS+=-lssl -lcrypto
-all: client server
 
-client: easy_ssl.o client.o
-	$(CC) -o client.exe client.o easy_ssl.o $(CFLAGS) $(LDFLAGS)
+all: static client server
 
-server: easy_ssl.o server.o
-	$(CC) -o server.exe server.o easy_ssl.o $(CFLAGS) $(LDFLAGS)
+static: $(OBJS_LIB)
+	$(AR) rcs $(STATIC_LIB) $(OBJS_LIB)
+
+client: easyssl.o client.o
+	$(CC) -o client.exe client.o easyssl.o $(CFLAGS) $(LDFLAGS)
+
+server: easyssl.o server.o
+	$(CC) -o server.exe server.o easyssl.o $(CFLAGS) $(LDFLAGS)
 
 
 clean:

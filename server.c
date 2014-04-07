@@ -1,35 +1,6 @@
 #include <stdio.h>
 #include <stdlib.h>
-#include "easy_ssl.h"
-#if 0
-void serv(SSL* ssl) /* Serve the connection -- threadable */
-{
-    char buf[1024];
-    char reply[1024];
-    int sd, bytes;
-    const char* HTMLecho="<html><body><pre>%s</pre></body></html>\n\n";
- 
-    if ( SSL_accept(ssl) == -1 )     /* do SSL-protocol accept */
-        ERR_print_errors_fp(stderr);
-    else
-    {
-        easyssl_print_cert(ssl);        /* get any certificates */
-        bytes = SSL_read(ssl, buf, sizeof(buf)); /* get request */
-        if ( bytes > 0 )
-        {
-            buf[bytes] = 0;
-            printf("Client msg: \"%s\"\n", buf);
-            sprintf(reply, HTMLecho, buf);   /* construct reply */
-            SSL_write(ssl, reply, strlen(reply)); /* send reply */
-        }
-        else
-            ERR_print_errors_fp(stderr);
-    }
-    sd = SSL_get_fd(ssl);       /* get socket connection */
-    SSL_free(ssl);         /* release SSL state */
-    close(sd);          /* close connection */
-}
-#endif
+#include "easyssl.h"
 
 int echo(EASYSSL *ctx)
 {

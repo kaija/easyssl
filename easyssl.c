@@ -20,7 +20,7 @@
 #include <openssl/ssl2.h>
 #include <openssl/err.h>
 
-#include "easy_ssl.h"
+#include "easyssl.h"
 
 int easyssl_send(EASYSSL *ctx, const void *data, size_t len, int timeout)
 {
