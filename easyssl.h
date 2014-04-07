@@ -137,10 +137,10 @@ int easyssl_send(EASYSSL *ctx, const void *data, size_t len, int timeout);
 int easyssl_recv(EASYSSL *ctx, void *data, size_t len, int timeout);
 
 /**
- * @name    easyssl_free
+ * @name    easyssl_destroy
  * @brief   free the EASYSSL structure
  * @param   ctx     the EASYSSL context
  */
-void easyssl_free(EASYSSL *ctx);
+void easyssl_destroy(EASYSSL *ctx);
 
 #endif
