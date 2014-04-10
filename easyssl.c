@@ -22,6 +22,11 @@
 
 #include "easyssl.h"
 
+char *easyssl_get_version()
+{
+    return EASYSSL_VERSION;
+}
+
 int easyssl_send(EASYSSL *ctx, const void *data, size_t len, int timeout)
 {
     if(!ctx) return -SSL_ERR_PARAM;

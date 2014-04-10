@@ -15,9 +15,11 @@
 #include <openssl/ssl23.h>
 #include <openssl/ssl2.h>
 
-#define EASYSSL_PATH_LEN   128
-#define EASYSSL_PASS_LEN   128
-#define EASYSSL_DEPTH      1
+#define EASYSSL_VERSION     "0.1"
+
+#define EASYSSL_PATH_LEN    128
+#define EASYSSL_PASS_LEN    128
+#define EASYSSL_DEPTH       1
 
 #define EASYSSL_SEND_TIMEO  5
 #define EASYSSL_RECV_TIMEO  5
